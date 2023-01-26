@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "formulahendry.auto-close-tag",
+        "jeff-hykin.better-cpp-syntax",
+        "formulahendry.code-runner",
+        "streetsidesoftware.code-spell-checker",
+        "github.vscode-pull-request-github",
+        "ritwickdey.liveserver",
+        "zhuangtongfa.material-theme",
+        "msjsdiag.vscode-react-native",
+        "ms-vscode-remote.remote-wsl"
+    ]
+}
