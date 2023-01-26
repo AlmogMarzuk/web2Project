@@ -1,14 +1,14 @@
-import React from "react";
-import Footer from "../Fotter";
-import NavBar from "../NavBar"
+// import React from "react";
+// import Footer from "../Fotter";
+// import NavBar from "../NavBar"
 
-const RootLayout = () => {
-return(
-    <div>
-    <NavBar/>
-    <Footer/>
-    </div>
-)
-}
+// const RootLayout = () => {
+// return(
+//     <div>
+//     <NavBar/>
+//     <Footer/>
+//     </div>
+// )
+// }
 
-export default RootLayout;
+// export default RootLayout;
