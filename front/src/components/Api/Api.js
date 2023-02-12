@@ -5,7 +5,7 @@ import default1 from './default';
 const Api = ()=>{
   const [isActive, setIsActive] = useState(false);
     const [data, setdata] = useState(default1);
-      console.log(data.forecast.forecastday[0].day.maxtemp_c)
+    
   const london = ()=>{
     const option = {
         method: 'GET',

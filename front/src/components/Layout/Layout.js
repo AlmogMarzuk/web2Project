@@ -9,7 +9,6 @@ import Api from '../Api/Api';
 
 const Layout = (props) => {
   const [formStatus, setformStatus] = useState("1"); 
-  const [loggedin,setloggedin] = useState("null")
   useEffect(() => {
  
       let data = window.localStorage.getItem('userName');
@@ -18,9 +17,7 @@ const Layout = (props) => {
         .then(function (response) {
         const adminslist = response.data;
         let found = false;
-        console.log(data);
         adminslist.forEach(element => {
-         console.log(element.name)
           if(element.name == data){
             found = true;
             setformStatus("4");
@@ -32,13 +29,7 @@ const Layout = (props) => {
   },[]);
 
 const login =  (enteredEmail)=>{
- /* axios.get('http://localhost:8000/login',  {
-    params: {
-      username: {enteredEmail}
-    }
-  })*/
   window.localStorage.setItem('userName', enteredEmail);
-  console.log(enteredEmail);
   axios.get('http://localhost:8000/admins')
   .then(function (response) {
   const adminslist = response.data;
