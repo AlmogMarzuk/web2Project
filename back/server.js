@@ -1,7 +1,8 @@
 const dotenv = require('dotenv').config()
 const express = require("express");
 const app = express();
-
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const mongoose=require('mongoose')
 const cors = require('cors');
 const seed = require("./seed");
@@ -38,10 +39,18 @@ db.on('error',error=>{console.error(error)})
 db.once('open',()=>{console.log('db connected!')})
 const PORT=process.env.PORT
 const indexRouter = require('./routes/index')
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 600000 }}))
 app.use('/',indexRouter)
 
 const flightRouter= require('./routes/flight_routes')
 app.use('/flight',flightRouter)
+
+const oneDay = 1000 * 60 * 60 ;
+
+app.use(cookieParser());
+
+
+
 
 
 

@@ -21,6 +21,11 @@ const List = ()=> {
 
   },[]);
 
+ const logout =() =>{
+  window.localStorage.setItem('userName', null);
+  window.location.reload();
+ };
+
 
   const inputChange = event => {
 
@@ -87,6 +92,9 @@ if(i==-1){
                <li onClick={()=>setformStatus("2")}>
                  Cart
                </li>
+               <li onClick={()=>logout()}>
+               Logout
+               </li>
               
                </ul>
              </nav>
@@ -124,7 +132,9 @@ if(i==-1){
                <li onClick={()=>setformStatus("2")}>
                  Cart
                </li>
-              
+               <li onClick={()=>logout()}>
+               Logout
+               </li>
                </ul>
              </nav>
            </div>

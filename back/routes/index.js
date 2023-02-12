@@ -6,5 +6,7 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/admins',admins.getAdmins);
+router.get('/cookieCheck',admins.checkCookie)
+router.get('/login', admins.login);
 
 module.exports = router

@@ -13,4 +13,5 @@ router.get('/',Flight.getFlights)
 router.get('/:id',Flight.getFlightById)
 router.post('/add',Flight.addFlight)
 
+
 module.exports = router

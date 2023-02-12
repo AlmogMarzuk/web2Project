@@ -12,7 +12,25 @@ const getAdmins = async(req,res)=>{
     } 
 }
 
+const login = async(req,res)=>{
+   const user = req.query.username.enteredEmail
+    req.session.user = user;
+   req.session.save();
+   console.log(req.session)
+   return res.send("Your are logged in");
+}
+
+const checkCookie = async(req,res)=>{
+     console.log(req.session)
+    if(req.session.user){
+        res.send(true);
+    }else{
+        res.send(false);
+    }
+}
 
 module.exports={
-    getAdmins
+    getAdmins,
+    login,
+    checkCookie
 }

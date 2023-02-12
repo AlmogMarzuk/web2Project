@@ -63,6 +63,12 @@ console.log(flight)
 
 }
 
+const logout =() =>{
+  window.localStorage.setItem('userName', null);
+  window.location.reload();
+ };
+
+
 const submitHandler = () => {
   const location = locationInputRef.current.value;
    const land = mainlandInputRef.current.value;
@@ -133,7 +139,15 @@ const submitHandler = () => {
         <div>
            <div id="main-navbar" className="navbar" >
              <h2 className="logo">Welcome back admin user here you can add new flights to the website</h2>
-            
+             <nav>
+               <ul>
+          
+               <li onClick={()=>logout()}>
+               Logout
+               </li>
+              
+               </ul>
+             </nav>
            </div>
          </div>
            

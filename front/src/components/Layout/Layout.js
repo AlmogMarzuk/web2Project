@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { useState , useRef } from 'react';
+import { useState , useRef ,useEffect } from 'react';
 import axios from 'axios';
 import classes from './AuthForm.module.css';
 import Register from '../Register/Register'
@@ -8,8 +8,36 @@ import AdminList from '../adminlist/AdminList';
 import Api from '../Api/Api';
 
 const Layout = (props) => {
+  const [formStatus, setformStatus] = useState("1"); 
+  const [loggedin,setloggedin] = useState("null")
+  useEffect(() => {
+ 
+      let data = window.localStorage.getItem('userName');
+      if(data != "null"){
+        axios.get('http://localhost:8000/admins')
+        .then(function (response) {
+        const adminslist = response.data;
+        let found = false;
+        console.log(data);
+        adminslist.forEach(element => {
+         console.log(element.name)
+          if(element.name == data){
+            found = true;
+            setformStatus("4");
+          }
+        });
+        if(found == false){setformStatus("3")}
+        })
+      }
+  },[]);
 
 const login =  (enteredEmail)=>{
+ /* axios.get('http://localhost:8000/login',  {
+    params: {
+      username: {enteredEmail}
+    }
+  })*/
+  window.localStorage.setItem('userName', enteredEmail);
   console.log(enteredEmail);
   axios.get('http://localhost:8000/admins')
   .then(function (response) {
@@ -88,7 +116,7 @@ login(enteredEmail);
 
 
 
-  const [formStatus, setformStatus] = useState("1"); 
+  
  if(formStatus=="1"){
   return (
     <div className={classes.frag}>
