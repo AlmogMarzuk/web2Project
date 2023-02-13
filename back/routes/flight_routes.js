@@ -12,6 +12,6 @@ const Flight=require('../controllers/flights')
 router.get('/',Flight.getFlights)
 router.get('/:id',Flight.getFlightById)
 router.post('/add',Flight.addFlight)
-
+router.post('/removeFlight',Flight.removeFlight)
 
 module.exports = router

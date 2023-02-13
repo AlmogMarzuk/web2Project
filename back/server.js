@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const mongoose=require('mongoose')
 const cors = require('cors');
 const seed = require("./seed");
+const { WebSocketServer } = require('ws');
 mongoose.set('strictQuery', false);
 const bodyParser=require('body-parser')
 seed.seedDB();
@@ -45,9 +46,11 @@ app.use('/',indexRouter)
 const flightRouter= require('./routes/flight_routes')
 app.use('/flight',flightRouter)
 
-const oneDay = 1000 * 60 * 60 ;
+
+
 
 app.use(cookieParser());
+
 
 
 
@@ -57,3 +60,4 @@ app.use(cookieParser());
 app.listen(PORT, () => {
   console.log(`Server is running on port:` + PORT);
 });
+

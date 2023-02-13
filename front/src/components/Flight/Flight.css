@@ -4,7 +4,7 @@
 	padding: 20px;
 	border-radius: 10px;
 	border: 5px;
-	border-color: tomato;
+	border-color: rgb(5, 3, 2);
 	border-style: solid;
 	transition: 200ms;
     width: 350px;
@@ -14,10 +14,11 @@
 }
 
 .card:hover {
-	transition: 200ms;
-	border: 3px;
-	border-color: tomato;
+	transition: 300ms;
+	border: 10px;
+	border-color: rgb(14, 28, 88);
 	border-style: solid;
+	background-color: rgb(206, 198, 198);
 }
 
 .card-header {

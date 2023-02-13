@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import { useState , useRef } from 'react';
 
 import classes from './Register.module.css';

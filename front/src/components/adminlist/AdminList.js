@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import { useState , useRef ,useEffect, Fragment} from 'react';
 import axios from 'axios';
 import Flight from '../Flight/Flight';
@@ -61,6 +62,14 @@ const removeFlight = (flight) =>{
     console.log("click")
 console.log(flight)
 
+axios.post('http://localhost:8000/flight/removeFlight', flight)
+.then(function (response) {
+      console.log(response.data)
+      setData(response.data)  
+      setlist(response.data);
+ })
+
+
 }
 
 const logout =() =>{
@@ -87,13 +96,18 @@ const submitHandler = () => {
       }]
       axios.post('http://localhost:8000/flight/add', newflight)
       .then(function (response) {
-        if(response.data == "Found"){
-          setError("This flight is aleady in the DB")
-        }else{
-            console.log(response.data)
+       if(response.data){
+        console.log(response.data)
         setData(response.data)  
         setError("This flight was added to the DB")
-        }
+        setlist(response.data);
+        locationInputRef.current.value = "";
+        mainlandInputRef.current.value = "";
+        imageinputRef.current.value  = "";
+         priceinputRef.current.value = "";
+       }else{
+        setError("This flight couldn't be added to the DB")
+       }
        
        })
     
@@ -103,18 +117,21 @@ const submitHandler = () => {
 }
 
   const inputChange = event => {
+    console.log(Data)
     if(event.target.value == ""){
       setlist(Data)
       console.log("test")
     return;
     }
     let result = [];
+    console.log(event.target.value)
     if(isNaN(event.target.value)){
       Data.forEach(item =>{
         if(item.name.toLowerCase().includes(event.target.value)){result.push(item)}
         if(item.category.toLowerCase().includes(event.target.value)){result.push(item)}
        })
        setlist(result); 
+       console.log(result)
     }else{
       Data.forEach(item =>{
         if(parseInt(item.price) <parseInt(event.target.value)){result.push(item)
@@ -138,7 +155,7 @@ const submitHandler = () => {
     
         <div>
            <div id="main-navbar" className="navbar" >
-             <h2 className="logo">Welcome back admin user here you can add new flights to the website</h2>
+             <h1 className="logo">Welcome back admin user here you can add new flights to the website</h1>
              <nav>
                <ul>
           
@@ -182,9 +199,11 @@ const submitHandler = () => {
 
 
            
-         <input id="filter"  onChange={inputChange} placeholder="Serach flight by the location name,mainland or max price "></input>
+    <div className="filter">
+       <input  onChange={inputChange} placeholder="Serach flight by the location name,mainland or max price "></input>
+       </div>
         <section class="cards">
-           {Data.map( (flight )  => {
+           {list.map( (flight )=> {
             return(
              <div>
            <Flight flight={flight} ></Flight> 

@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import { useState , useRef ,useEffect, Fragment} from 'react';
 import axios from 'axios';
 import Flight from '../Flight/Flight';
@@ -100,8 +101,10 @@ if(i==-1){
              </nav>
            </div>
          </div>
-       
-         <input id="filter"  onChange={inputChange} placeholder="Serach flight by the location name,mainland or max price "></input>
+       <div className="filter">
+       <input   onChange={inputChange} placeholder="Serach flight by the location name,mainland or max price "></input>
+       </div>
+        
         <section class="cards">
            {list.map( (flight )  => {
             return(

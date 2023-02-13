@@ -5,5 +5,7 @@ h2{
     margin: 0px auto 0px auto;
     margin-top: 7px;
     border: solid;
-    border-radius: 10%;
+    border-radius: 5%;
+    padding: 10px;
+    color: white;
 }

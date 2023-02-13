@@ -34,49 +34,28 @@ const getFlightById= async(req,res)=>{
 }
 
 const addFlight=async(req,res)=>{
-   
-
-    flight = await Flight.find({
-        "name": req.body[0].name
-    })
-    console.log(flight[0].name)
-    console.log(req.body[0].name)
-       if(flight[0].name!=req.body[0].name||
-        flight[0].price!=req.body[0].price
-        ){
         console.log("add new flight to the DB")
         await Flight.insertMany(req.body);
         flights=await Flight.find()
         res.status(200).send(flights)
-       }else{
-        res.status(200).send("Found");
-       }
       
-    
-   
-   /* const flight=Flight({
-        Name:req.body.Name
-    })
-
-    flight.save((error,newFlight)=>{
-        if(error){
-            res.status(400).send({
-                'status': 'fail',
-                'error':error.message
-            })
-
-        }else{
-            res.status(200).send({
-                'status': 'ok',
-                'flight':newFlight
-            })
-        }
-
-    })*/
 }
+
+const removeFlight = async(req,res) =>{
+    console.log(req.body);
+   await Flight.deleteOne( { 
+        name: req.body.name ,
+        price: req.body.price } )
+        flights=await Flight.find()
+        res.status(200).send(flights)  
+
+
+}
+
 
 module.exports={
     getFlights,
     addFlight,
-    getFlightById
+    getFlightById,
+    removeFlight
 }

@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import './Api.css'
 import axios from 'axios';
 import { useState , useRef ,useEffect } from 'react';
@@ -5,7 +6,6 @@ import default1 from './default';
 const Api = ()=>{
   const [isActive, setIsActive] = useState(false);
     const [data, setdata] = useState(default1);
-    
   const london = ()=>{
     const option = {
         method: 'GET',
@@ -16,11 +16,9 @@ const Api = ()=>{
           'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
         }
       };
-      axios.request(option).then(function (response) {
-             
+      axios.request(option).then(function (response) {  
         setdata(response.data)
         setIsActive(true)
-       
     }).catch(function (error) {
         console.error(error);
     });

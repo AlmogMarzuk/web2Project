@@ -1,6 +1,6 @@
 .cards {
     display: flex;
-    margin-top: 80px;
+    margin-top: 70px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
@@ -45,6 +45,11 @@
 
  }
 
-#RemoveButton{
-
+ .filter{
+  width: 23%;
+  display: inline-block;
+  margin-left: 39%;
+  padding: 50px;
+  background: lightsteelblue;
+  margin-top: 90px
 }
