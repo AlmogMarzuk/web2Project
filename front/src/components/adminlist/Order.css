@@ -1,0 +1,120 @@
+.card {
+	background-color: rgb(227, 227, 227);
+	color: #272727;
+	padding: 20px;
+	border-radius: 10px;
+	border: 5px;
+	border-color: rgb(5, 3, 2);
+	border-style: solid;
+	transition: 200ms;
+    width: 350px;
+    height: 475px;
+    margin: 2px;
+    
+}
+
+.card:hover {
+	transition: 300ms;
+	border: 10px;
+	border-color: rgb(14, 28, 88);
+	border-style: solid;
+	background-color: rgb(206, 198, 198);
+}
+
+.card-header {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+    padding: 20px;
+
+}
+
+.profile {
+	width: 2.5rem;
+	height: 2.5rem;
+	background-color: tomato;
+	border-radius: 50%;
+	margin: 10px;
+	font-size: 20pt;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+	justify-content: center;
+}
+
+.letter {
+	vertical-align: middle;
+}
+
+.card-title-group {
+	justify-content: center;
+    padding: 20px;
+}
+
+.card-title {
+	flex: 0.5;
+	font-size: large;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+.card-date {
+	flex: 0.3;
+	font-size: small;
+	margin-top: 0;
+}
+
+.card-image {
+	border-radius: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+    width: 200px;
+    height: 150px;
+}
+.card-like-icon {
+	height: 25px;
+}
+
+.card-text {
+	width: 350px;
+	font-size: medium;
+}
+
+.card-like-bar {
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+	justify-content: space-between;
+}
+
+.like-text {
+	font-size: small;
+	margin-left: 10px;
+}
+.orderText{
+    font-size: large;
+	margin-left: 20px;
+    margin-top: 20px;
+}
+
+.order {
+	background-color: rgb(227, 227, 227);
+	color: #272727;
+	padding: 20px;
+	border-radius: 10px;
+	border: 5px;
+	border-color: rgb(5, 3, 2);
+	border-style: solid;
+	transition: 200ms;
+    width: 350px;
+    height: 200px;
+    margin: 2px;
+    
+}
+
+.order:hover {
+
+	border: 10px;
+	border-color: rgb(14, 28, 88);
+	border-style: solid;
+	background-color: rgb(206, 198, 198);
+}

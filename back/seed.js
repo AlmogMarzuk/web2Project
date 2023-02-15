@@ -1,5 +1,6 @@
 const {Flight}  = require("./models/flight_model");
 const {Admin}   = require("./models/admins");
+const {Orders} = require('./models/orders');
 
 const seedFlight = [
     {
@@ -169,11 +170,18 @@ const seedFlight = [
     name: "benfain12@gmail.com"
   }]
 
+  const order = [{
+    id:"1",
+    name: "benfain12@gmail.com",
+    price: 2024
+  }]
+
   const seedDB = async () => {
   /*  await Flight.deleteMany({});
     await Flight.insertMany(seedFlight);
     await Admin.deleteMany({});
-    await  Admin.insertMany(admin);*/
+    await  Admin.insertMany(admin);
+    await Orders.insertMany(order);*/
     console.log("The Database uploaded successfully");
   }
  

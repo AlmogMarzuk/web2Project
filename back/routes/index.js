@@ -8,5 +8,6 @@ router.get('/',(req,res)=>{
 router.get('/admins',admins.getAdmins);
 router.get('/cookieCheck',admins.checkCookie)
 router.get('/login', admins.login);
-
+router.get('/getOrders',admins.getOrders);
+router.post('/addOrder',admins.addOrder)
 module.exports = router

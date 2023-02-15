@@ -5,6 +5,7 @@ import Flight from '../Flight/Flight';
 import '../FlightsList/List.css';
 import CartItem from '../CartItem/CartItem'
 import classes from '../Layout/AuthForm.module.css'
+import Order from './Order';
 
 const AdminList = ()=> {
 
@@ -17,6 +18,8 @@ const AdminList = ()=> {
   const [isLoading, setLoading] = useState(true);
   const [Data,setData] = useState([])
   const [error,setError] = useState("");
+  const [orders,setOrders] = useState([]);
+  const [status,setStatus] = useState("1")
   
   useEffect(()=>{
     axios.get('http://localhost:8000/flight/')
@@ -25,9 +28,16 @@ const AdminList = ()=> {
      setData(response.data) 
      setLoading(false)
     })
+   
+    axios.get('http://localhost:8000/getOrders')
+    .then(function (response) {
+      console.log(response.data)
+     setOrders(response.data)
+     console.log(orders);
+     })
+    
   },[]);
 
-   
   const isValidUrl = urlString => {
     var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
   '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
@@ -148,7 +158,7 @@ const submitHandler = () => {
   return (
     <h1>Loading</h1>
       )
- }else{
+ }else if(status=="1"){
  
     return( 
       <Fragment>
@@ -162,7 +172,12 @@ const submitHandler = () => {
                <li onClick={()=>logout()}>
                Logout
                </li>
-              
+               <li onClick={()=>setStatus("1")}>
+              Flights
+               </li>
+               <li onClick={()=>setStatus("2")}>
+              Orders
+               </li>
                </ul>
              </nav>
            </div>
@@ -191,7 +206,7 @@ const submitHandler = () => {
         <div className={classes.actions}>
          <button 
          onClick={submitHandler}
-         >Login</button>
+         >Add a new flight</button>
         
         </div>
      <h1>{error}</h1>
@@ -216,6 +231,50 @@ const submitHandler = () => {
        </section>
        </Fragment>
          )
+  }else{
+    return(
+      <Fragment>
+    
+      <div>
+         <div id="main-navbar" className="navbar" >
+           <h1 className="logo">Welcome back admin user here you can add new flights to the website</h1>
+           <nav>
+             <ul>
+        
+             <li onClick={()=>logout()}>
+             Logout
+             </li>
+             <li onClick={()=>setStatus("1")}>
+            Flights
+             </li>
+             <li onClick={()=>setStatus("2")}>
+            Orders
+             </li>
+             </ul>
+           </nav>
+         </div>
+       </div>
+         
+        
+   
+
+
+         
+
+      <section class="cards">
+         {orders.map( (order )=> {
+          return(
+           <div>
+         <Order order={order} ></Order> 
+           
+          
+           </div> )
+         }
+         
+         )}
+     </section>
+     </Fragment>
+    )
   }
   
  }

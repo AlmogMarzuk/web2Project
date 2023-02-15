@@ -4,14 +4,15 @@ import axios from 'axios';
 import Flight from '../Flight/Flight';
 import './List.css';
 import CartItem from '../CartItem/CartItem'
-const List = ()=> {
+import Api from '../Api/Api';
+const List = (props)=> {
 
   const [list,setlist] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [formStatus, setformStatus] = useState("1"); 
   const [Cart,setCart] = useState([]);
   const [Data,setData] = useState([])
-  
+  const [name,setname] = useState(props.name)
   useEffect(()=>{
     axios.get('http://localhost:8000/flight/')
     .then(function (response) {
@@ -19,13 +20,64 @@ const List = ()=> {
      setData(response.data) 
      setLoading(false)
     })
+   
+    axios.post('http://localhost:8000/flight/getCart')
+    .then(function (response) {
+    setCart(response.data);
+    })
 
-  },[]);
+ 
+   
+    console.log("test")
+    
+  },["1", formStatus]);
 
  const logout =() =>{
   window.localStorage.setItem('userName', null);
   window.location.reload();
  };
+
+const finishOrder=()=>{
+
+  //if(Cart!=[]){
+    let totalprice = 0 ;
+  axios.post('http://localhost:8000/flight/getCart')
+  .then(function (response) {
+  response.data.forEach(item=>{
+    console.log(item.totalPrice)
+    totalprice+=item.totalPrice
+})
+
+const newOrder = [{
+  id: Math.floor(Math.random() * 1000000).toString(),
+  name: name,
+  price: totalprice
+}]
+
+axios.post('http://localhost:8000/addOrder',newOrder)
+.then(function (response) {
+console.log(response.data);
+
+axios.post('http://localhost:8000/flight/emptyCart')
+.then(function (response) {
+  console.log("cart is empty")
+  })
+
+})
+
+setformStatus("3")
+setTimeout(() => {
+  window.localStorage.setItem('userName', null);
+  window.location.reload();
+}, 3000);
+})
+  
+
+
+
+
+
+};
 
 
   const inputChange = event => {
@@ -54,23 +106,14 @@ const List = ()=> {
   };
 const addToCart =((item)=>{
 
-
-console.log(item);
-const i = Cart.findIndex(e => e.name === item.name);
-if(i==-1){
-  item.sum++;
-  item.totalPrice = item.price;
-  setCart ( (Cart ) => {
-    return [item , ...Cart];
-  });
-}else{
-  Cart[i].sum++;
-  const j = Data.findIndex(e => e.name == item.name)
-  Cart[i].totalPrice = Data[j].price*Cart[i].sum;
-}
-
-
-
+  axios.post('http://localhost:8000/flight/addToCart', item)
+      .then(function (response) {
+       if(response.data){
+        console.log(response.data)
+        setCart(response.data);
+       }
+       })
+       
 })
  
  if(isLoading) {
@@ -118,9 +161,12 @@ if(i==-1){
            
            )}
        </section>
+       <div className="api">
+       <Api></Api>
+       </div>
        </Fragment>
          )
-  }else{
+  }else if((formStatus==2)){
     return( 
       <Fragment>
         
@@ -149,7 +195,7 @@ if(i==-1){
             return(
               <div>
            <CartItem flight={flight} ></CartItem> 
-              <button id="RemoveButton" onClick={()=>addToCart(flight)}>Remove</button>
+             
             
               </div>
             
@@ -157,9 +203,19 @@ if(i==-1){
            }
            
            )}
+        
        </section>
+       <button  onClick={()=>finishOrder()}>FINISH YOUR ORDER</button>
+       <div className="api">
+       <Api></Api>
+       </div>
+    
        </Fragment>
          )
+  }else if((formStatus==3)){
+    return (
+      <h1>Your order is finished</h1>
+    )
   }
   
  }

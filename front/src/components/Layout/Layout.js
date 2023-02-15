@@ -52,7 +52,7 @@ const [error,setError] = useState("");
 const [logintest,setLogin] = useState("")
 const [isLogin, setIsLogin] = useState("false");
 const [isLoading, setIsLoading] = useState(false);
-
+const [name,setName]= useState("")
 
 
 
@@ -97,7 +97,7 @@ fetch (url ,
   }
 }).then( (data) => {
   setError("hello "+enteredEmail+" your details are correct");
-  
+  setName(enteredEmail)
 login(enteredEmail);
   
 }).catch (err => {
@@ -199,7 +199,7 @@ login(enteredEmail);
  } else if(formStatus =="3"){
   return (
     <Fragment>
-  <List/>
+  <List name={name}/>
   </Fragment>)
   
  }else{
